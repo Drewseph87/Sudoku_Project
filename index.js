@@ -59,8 +59,9 @@ const sudokuIsValid = (puzzle) => {
       break
     }
   }
-  for(let x = 0; x <= 3; x++){
-    for(let y = 0; y <=3; y++){
+
+  for(let x = 0; x <= 2; x++){
+    for(let y = 0; y <= 2; y++){
       let sectionValid = includes1to9(getSection(puzzle,x,y))
       if(!sectionValid){
         isValid = false;
@@ -71,6 +72,16 @@ const sudokuIsValid = (puzzle) => {
   return isValid
 }
 
+const isSame = (puzzle, p8zzle) => {
+  for(let i = 0; i < puzzle.length; i++){
+    for(let j = 0; j <= puzzle[i].length; j++){
+    if(puzzle[i][j] !== p8zzle[i][j]){
+      return false;
+    }
+    } 
+  }
+  return true
+};
 
 let puzzle = [
   [8, 9, 5,   7, 4, 2,   1, 3, 6],
@@ -86,23 +97,22 @@ let puzzle = [
   [3, 2, 8,   1, 9, 6,   5, 4, 7],
 ];
 
-// getRow(puzzle, 8);
+getRow(puzzle, 8);
 // // // -> [ 3,2,8,1,9,6,5,4,7 ]
 
-// getRow(puzzle, 0);
+getRow(puzzle, 0);
 // // // -> [ 8,9,5,7,4,2,1,3,6 ]
 
-// getColumn(puzzle, 0);
+getColumn(puzzle, 0);
 // // // -> [ 8,2,4,9,5,6,1,7,3 ]
 
-// getColumn(puzzle, 8);
+getColumn(puzzle, 8);
 // // // -> [ 6,5,2,8,4,1,3,9,7 ]
 
-// getSection(puzzle, 2, 2);
-// // // -> [ 8,9,5,2,7,1,4,6,3 ]
+getSection(puzzle, 2, 2);
+// // // -> [ 6,2,3,8,1,9,5,4,7 ]
 
-// // // This grabs the values from column 0 and row 1 (second from the top left)
-// getSection(puzzle, 0, 1);
+getSection(puzzle, 0, 1);
 // // -> [ 7,4,2,9,6,3,5,8,1 ]
 
 includes1to9([1,2,3,4,5,6,7,8,9]) // => true
@@ -126,3 +136,19 @@ sudokuIsValid(p8zzle);
 // => false
 
 
+let puzzleCopy = [[ 8,9,5,7,4,2,1,3,6 ],
+                  [ 2,7,1,9,6,3,4,8,5 ],
+                  [ 4,6,3,5,8,1,7,9,2 ],
+                  [ 9,3,4,6,1,7,2,5,8 ],
+                  [ 5,1,7,2,3,8,9,6,4 ],
+                  [ 6,8,2,4,5,9,3,7,1 ],
+                  [ 1,5,9,8,7,4,6,2,3 ],
+                  [ 7,4,6,3,2,5,8,1,9 ],
+                  [ 3,2,8,1,9,6,5,4,7 ]];
+
+
+isSame(puzzle, p8zzle);
+// => false
+
+isSame(puzzle, puzzleCopy);
+// => true
